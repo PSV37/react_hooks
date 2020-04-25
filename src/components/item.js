@@ -1,14 +1,22 @@
 import React from "react";
 import "./item.css";
 function item(props) {
+  const {editable, item, onClick, handleDoubleClick, handleOnKeyPress, index} = props
   return (
     <div className="item-style">
-      <h3>{props.item.name}</h3>
-      <h3>{props.item.calorie}</h3>
+      {
+        editable ? (
+          <input type="text" onKeyPress={(e) => handleOnKeyPress(e, index)} defaultValue={item.name} />
+        ) : (
+          <h3  onDoubleClick={handleDoubleClick}>{item.name}</h3>
+        )
+      }
+
+      <h3>{item.calorie}</h3>
       <button
-        name={props.item.name}
+        name={item.name}
         className="remove-button"
-        onClick={props.onClick}
+        onClick={onClick}
       >
         Remove
       </button>
